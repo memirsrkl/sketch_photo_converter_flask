@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>EFU</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" href="static/img/favicon.png" type="image/x-icon">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+    <header>
+        <nav>
+          <div class="logo"><img src="../static/img/logo.png" alt=""></div>
+          <ul class="menu">
+            <li><a href="#">Anasayfa</a></li>
+            <li><a href="#">Hakkımızda</a></li>
+            <li><a href="#">Hizmetler</a></li>
+            <li><a href="#">İletişim</a></li>
+          </ul>
+          <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </nav>
+      </header>
+    <div class="splitview skewed">
+        <div class="panel bottom">
+            <div class="content">
+                <div class="description">
+                    <h1>Eskizden Fotoğrafa Dönüştürülmüş Resim.</h1>
+                    <p>GAN teknolojisi ile style transfer yapılmış uygulama</p>
+                </div>
+
+                <img src="static/img/19_original.jpg" alt="Original">
+            </div>
+        </div>
+
+        <div class="panel top">
+            <div class="content">
+                <div class="description">
+                    <h1 style="color: rgb(44, 44, 44);">Fotoğraftan Eskize Dönüştürülmüş Resim</h1>
+                    <p style="color: rgb(44, 44, 44);">Alınan fotoğrafın GAN teknolojii ile eskiz dönüşümünü yapan uygulama</p>
+                </div>
+
+                <img src="static/img/19_styled.jpg" alt="Duotone">
+            </div>
+        </div>
+
+        <div class="handle"></div>
+    </div>
+    <div class="container">
+        {%for filename in uploaded %}
+        <div
+            class="slide"
+            style="background-image: url('{{url_for("static",filename='uploaded/'+filename)}}');"
+        >
+        {
+      
+        </div>
+      {% endfor %}
+      </div>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <div class="topfoto">
+            <div class="cam">
+            <div class="fotoesk" id="ekfot">
+                <h3 >Fotoğraftan Eskiz için buraya Yükleyiniz</h3>
+                <input type="file" name="file1">
+                <br>
+                <br>
+
+                {% if converted_file %}
+            <div class="skean">
+            <img src="{{url_for('static',filename='uploaded/'+reque)}}" id="" width="200px" height="200px">
+
+            </div>
+            {% endif %}
+        <div class="fotocuk">
+            
+            <div class="yatt" id="myElement1"><button onclick="changeImage" class="ayrac"></button></div>
+            
+            {% for filename in filenames %}
+            <img class="sem" src="{{ url_for('static', filename='images/' + filename) }}" width="200" height="200">
+            <br>
+                <a id="toggleButton1" href="{{ url_for('delete_file', filename=filename) }}">Fotoğraftan Eskize</a>
+                <br>
+            {% endfor %}
+            {% if converted_file %}
+            
+        <img src="{{url_for('static',filename='converting/'+converted_file)}}" id="" class="phototosketch" width="200px" height="200px">
+        {% endif %}</div>
+        
+                </div>
+            
+            <div class="eskfoto" id="ekfot">
+                
+                <h3>Eskizden Fotoğrafa için buraya Yükleyiniz</h3>
+            <input type="file" name="file2">
+            <br>
+            <br>
+            {% if sketch_file %}
+            <div class="skaen">
+            <img src="{{url_for('static',filename='uploaded/'+hele)}}" id="" width="200px" height="200px">
+
+            </div>
+            {% endif %}
+            <div class="fotocuk">
+                <div  id="myElement2" class="yatt"><button  class="ayrac"></button></div>
+                {% for filename in sketch %}
+            <img class="sem" src="{{ url_for('static', filename='sketch/' + filename) }}" width="200" height="200">
+        <br>
+            <a id="toggleButton2" href="{{ url_for('delete_files', filename=filename) }}">Eskizden Fotoğrafa</a>
+            <br>
+        {% endfor %}
+        
+{% if sketch_file %}
+<img src="{{url_for('static',filename='convertings/'+sketch_file)}}" width=auto height=auto>
+{% endif %}</div>
+            
+            </div>
+            <div class="btcon">
+            <button type="submit">Yükle</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <script src="static/js/script.js"></script>
+</body>
+</html>
